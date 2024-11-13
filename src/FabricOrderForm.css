@@ -1,0 +1,142 @@
+/* General form styling */
+.fabric-order-form {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Date fields styling */
+.date-fields,
+.production-quantity,
+.unit-field,
+.fabric-field {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.date-fields label,
+.production-quantity label,
+.unit-field label {
+  flex: 1; /* Make labels take equal space */
+  margin-right: 10px; /* Space between labels */
+}
+
+.date-fields label:last-child,
+.production-quantity label:last-child,
+.unit-field label:last-child {
+  margin-right: 0; /* Remove margin for the last label */
+}
+
+/* Label styling */
+label {
+     display: flex;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* Input and select styling */
+input[type="text"],
+input[type="number"],
+select,
+input[type="date"] { /* Add input[type="date"] to style date inputs */
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+  width: 250px; /* Decrease width to 80% (adjust as needed) */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+input[type="date"]:focus { /* Add focus styles for date inputs */
+  border-color: #007bff; /* Blue border on focus */
+  outline: none;
+}
+
+/* Color and quantity inputs styling */
+.color-quantity-inputs {
+  margin: 20px 0;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.color-quantity-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* Button styling */
+.add-color-button,
+button[type="submit"],
+button.add-more {
+  background-color: #4caf50; /* Green */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.add-color-button:hover,
+button[type="submit"]:hover,
+button.add-more:hover {
+  background-color: #45a049; /* Darker green */
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+/* Submit button styling */
+button[type="submit"] {
+  background-color: #008cba; /* Blue */
+  width: 100%;
+  margin-top: 20px; /* Space above the submit button */
+}
+
+button[type="submit"]:hover {
+  background-color: #007b9e; /* Darker blue */
+}
+
+/* Add More button specific styling */
+button[type="button"].add-more {
+  background-color: #008cba; /* Blue */
+  width: auto; /* Adjust width as needed */
+  margin-top: 10px; /* Space above the button */
+}
+
+button.add-more:hover {
+  background-color: #0069d9; /* Darker blue on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .date-fields,
+  .production-quantity,
+  .unit-field {
+    flex-direction: column; /* Stack labels vertically */
+  }
+  .date-fields label,
+  .production-quantity label,
+  .unit-field label {
+    margin-right: 0; /* Reset margin for vertical stacking */
+    margin-bottom: 10px; /* Space between stacked labels */
+  }
+}
