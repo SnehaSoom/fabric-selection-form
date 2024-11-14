@@ -1,6 +1,6 @@
 /* General form styling */
 .fabric-order-form {
-  max-width: 600px;
+  max-width: 800px;
   margin: auto;
   padding: 30px;
   border: 1px solid #ccc;
@@ -47,6 +47,7 @@ label {
     font-weight: bold;
     flex-direction: column;
     align-items: stretch;
+    /* width: 250px !important; */
 }
 
 /* Input and select styling */
@@ -59,6 +60,17 @@ input[type="date"] { /* Add input[type="date"] to style date inputs */
   border: 1px solid #ccc;
   border-radius: 4px;
   transition: border-color 0.3s;
+  height: 20px;
+  width: 250px; /* Decrease width to 80% (adjust as needed) */
+}
+
+.Select{
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+  height: 36px;
   width: 250px; /* Decrease width to 80% (adjust as needed) */
 }
 
@@ -139,4 +151,60 @@ button.add-more:hover {
     margin-right: 0; /* Reset margin for vertical stacking */
     margin-bottom: 10px; /* Space between stacked labels */
   }
+}
+
+
+.fabric-section{
+  /* border: 1px solid black; */
+  /* height: 400px; */
+  display: flex;
+}
+
+.fabric-form-section{
+  border: 1px dotted gray;
+  border-radius: 10px;
+  padding: 5px;
+  width: 90%;
+  margin-bottom: 10px;
+}
+
+.fabric-form-fields{
+  /* border: 1px solid blue; */
+  width: calc(100% - 60px);
+  display: flex;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+
+.fabric-form-col-fields{
+  /* border: 1px solid blue; */
+  display: flex;
+  /* flex-direction: column; */
+}
+
+.fabric-form-row-fields{
+  display: flex;
+}
+
+.fabric-form-row-fields label{
+  display: block !important;
+  margin-left: 20px;
+}
+
+.fabric-form-fields label{
+  width: 250px !important;
+}
+
+.fabric-btn-section{
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(10px);
+}
+
+.fabric-btn-section button {
+  width: 80px;
 }

@@ -1,54 +1,102 @@
 import React, { useState } from "react";
+import Select from 'react-select';
 import "./FabricOrderForm.css";
 
+const fabricNameoptions = [
+  { value: 'Cotton', label: 'Cotton' },
+  { value: 'chiffon', label: 'chiffon' },
+  { value: 'satin', label: 'satin' },
+];
+
+const fabricStageOptions = [
+  { value: '1', label: '1' },
+  { value: '2', label: '2' },
+  { value: '3', label: '3' },
+];
+
 const FabricOrderForm = () => {
-  const [startDate, setStartDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
-  const [endDate, setEndDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
   const [fabricName, setFabricName] = useState("");
-  const [perPieceRequirement, setPerPieceRequirement] = useState(0.5);
+  const [startDate, setStartDate] = useState(new Date().toISOString().split("T")[0]);
+  const [endDate, setEndDate] = useState(new Date().toISOString().split("T")[0]);
   const [productionPerDay, setProductionPerDay] = useState(5);
   const [totalOrderQuantity, setTotalOrderQuantity] = useState(12000);
-  const [unit, setUnit] = useState("M"); // Default unit
-  const [processes, setProcesses] = useState("");
-  const [stagesToSkip, setStagesToSkip] = useState(""); // Single value for dropdown
-  const [colorQuantity, setColorQuantity] = useState([
-    { color: "", quantity: "" },
+  const [fabricEntries, setFabricEntries] = useState([
+    {
+      fabricName: "",
+      unit: "",
+      processes: [],
+      stagesToSkip: "",
+      colorQuantity: [{ color: "", quantity: "" }]
+    }
   ]);
   const [chinaFabric, setChinaFabric] = useState(false);
   const [chinaFabricName, setChinaFabricName] = useState("");
 
-  const handleColorChange = (index, field, value) => {
-    const newColorQuantity = [...colorQuantity];
-    newColorQuantity[index][field] = value;
-    setColorQuantity(newColorQuantity);
+  const handleInputChange = (index, event) => {
+    const { name, value } = event.target;
+    const updatedFabricEntries = [...fabricEntries];
+    updatedFabricEntries[index][name] = value; // Update the state based on the input field name
+    setFabricEntries(updatedFabricEntries);
   };
 
-  const addColorQuantity = () => {
-    setColorQuantity([...colorQuantity, { color: "", quantity: "" }]);
+  const handleFabricChange = (index, selectedOptions, name) => {
+    const updatedFabricEntries = [...fabricEntries];
+    updatedFabricEntries[index][name] = selectedOptions ? selectedOptions : [];
+    setFabricEntries(updatedFabricEntries);
   };
 
-  const handleStagesChange = (e) => {
-    setStagesToSkip(e.target.value); // Update state with selected stage
+  const handleUnitChange = (index, event) => {
+    const { value } = event.target;
+    const updatedFabricEntries = [...fabricEntries];
+    updatedFabricEntries[index].unit = value;
+    setFabricEntries(updatedFabricEntries);
   };
+
+  const handleColorChange = (index, colorIndex, key, value) => {
+    const updatedFabricEntries = [...fabricEntries];
+    updatedFabricEntries[index].colorQuantity[colorIndex][key] = value;
+    setFabricEntries(updatedFabricEntries);
+  };
+
+  const addColorQuantity = (index) => {
+    const updatedFabricEntries = [...fabricEntries];
+    updatedFabricEntries[index].colorQuantity.push({ color: "", quantity: "" });
+    setFabricEntries(updatedFabricEntries);
+  };
+
+  const removeColorQuantity = (index, colorIndex) => {
+    const updatedFabricEntries = [...fabricEntries];
+    updatedFabricEntries[index].colorQuantity = updatedFabricEntries[index].colorQuantity.filter((_, i) => i !== colorIndex);
+    setFabricEntries(updatedFabricEntries);
+  };
+
+  const addFabricEntry = () => {
+    setFabricEntries((prevEntries) => [
+      ...prevEntries,
+      {
+        fabricName: "",
+        unit: "",
+        processes: [],
+        stagesToSkip: "",
+        colorQuantity: [{ color: "", quantity: "" }]
+      }
+    ]);
+  };
+
+  const removeFabricEntry = (index) => {
+    let updatedFabricEntries = [...fabricEntries];
+    updatedFabricEntries = updatedFabricEntries.filter((_, i) => i !== index);
+    setFabricEntries(updatedFabricEntries);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic
     console.log({
       startDate,
       endDate,
-      fabricName,
-      perPieceRequirement,
       productionPerDay,
       totalOrderQuantity,
-      unit,
-      processes,
-      stagesToSkip,
-      colorQuantity,
+      fabricEntries,
       chinaFabric,
       chinaFabricName,
     });
@@ -93,113 +141,145 @@ const FabricOrderForm = () => {
           />
         </label>
       </div>
-      <div className="fabric-field">
-      <label>
-        Fabric Name:
-        <select
-          value={processes}
-          onChange={(e) => setFabricName(e.target.value)}
-        >
-          <option value="">Select Fabric</option>
-          <option value="cotton">Cotton</option>
-          <option value="silk">Silk</option>
-          <option value="chiffon">Chiffon</option>
-          <option value="satin">Satin</option>
-        </select>
-      </label>
-      <label>
-          Per Piece Requirement:
-          <input
-            type="number"
-            step="0.1"
-            value={perPieceRequirement}
-            onChange={(e) => setPerPieceRequirement(parseFloat(e.target.value))}
-          />
-        </label>
-      </div>
-      <div className="unit-field">
-        
-
-        <label>
-          Choose Unit:
-          <select value={unit} onChange={(e) => setUnit(e.target.value)}>
-            <option value="M">M</option>
-            <option value="Kg">Kg</option>
-          </select>
-        </label>
-        <label>
-        Processes:
-        <select
-          value={fabricName}
-          onChange={(e) => setProcesses(e.target.value)}
-        >
-          <option value="">Select Process</option>
-          <option value="dying">Dying</option>
-          <option value="mock-up">Mock Up</option>
-          <option value="china-lace">China Lace</option>
-          <option value="bag-viol">Bag Viol</option>
-        </select>
-      </label>
-      </div>
-     
-      <div className="stage-field">
-        <h3>Color and Quantity</h3>
-        {colorQuantity.map((colorItem, index) => (
-          <div key={index}>
-            <input
-              type="text"
-              placeholder="Color"
-              value={colorItem.color}
-              onChange={(e) =>
-                handleColorChange(index, "color", e.target.value)
-              }
-            />
-            <input
-              type="number"
-              placeholder="Quantity"
-              value={colorItem.quantity}
-              onChange={(e) =>
-                handleColorChange(index, "quantity", e.target.value)
-              }
-            />
+      <label>Fabric Section</label>
+      {fabricEntries.map((fabricEntry, index) => (
+        <div key={index} className="fabric-section">
+          <div className="fabric-form-section">
+            <div className="fabric-form-fields">
+              <label>
+                Fabric Name:
+                <Select
+                  value={fabricEntry.fabricName}
+                  onChange={(value) => handleFabricChange(index, value, 'fabricName')}
+                  options={fabricNameoptions}
+                  isClearable
+                  placeholder="Select"
+                />
+              </label>
+              <label>
+                Per Piece Requirement:
+                <input
+                  type="number"
+                  step="0.1"
+                  name="perPieceRequirement"
+                  value={fabricEntry.perPieceRequirement}
+                  onChange={(e) => handleInputChange(index, e)}
+                />
+              </label>
+            </div>
+            <div className="fabric-form-col-fields">
+              <label>Unit:</label>
+              <div className="fabric-form-row-fields">
+                <label>
+                  <input
+                    type="radio"
+                    name="unit"
+                    value="M"
+                    checked={fabricEntry.unit === "M"}
+                    onChange={(e) => handleUnitChange(index, e)}
+                  />
+                  M
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="unit"
+                    value="Kg"
+                    checked={fabricEntry.unit === "Kg"}
+                    onChange={(e) => handleUnitChange(index, e)}
+                  />
+                  Kg
+                </label>
+              </div>
+            </div>
+            <div className="fabric-form-fields">
+              <label>
+                Processes:
+                <Select
+                  value={fabricEntry.processes}
+                  onChange={(value) => handleFabricChange(index, value, 'processes')}
+                  options={fabricNameoptions}
+                  isMulti
+                  isClearable
+                  placeholder="Select"
+                />
+              </label>
+            </div>
+            <div className="fabric-form-fields">
+              <div className="stage-field">
+                <label>Color and Quantity</label>
+                {fabricEntry.colorQuantity.map((colorItem, colorIndex) => (
+                  <div key={colorIndex}>
+                    <input
+                      style={{ width: '100px', marginRight: '14px' }}
+                      type="text"
+                      placeholder="Color"
+                      value={colorItem.color}
+                      onChange={(e) => handleColorChange(index, colorIndex, "color", e.target.value)}
+                    />
+                    <input
+                      style={{ width: '100px', marginRight: '12px' }}
+                      type="number"
+                      placeholder="Quantity"
+                      value={colorItem.quantity}
+                      onChange={(e) => handleColorChange(index, colorIndex, "quantity", e.target.value)}
+                    />
+                    {fabricEntry.colorQuantity.length > 1 && <button style={{ marginRight: '14px' }} type="button" onClick={() => removeColorQuantity(index, colorIndex)}>
+                      - Remove
+                    </button>}
+                    {(fabricEntry.colorQuantity.length - 1 === colorIndex) && <button type="button" onClick={() => addColorQuantity(index)}>
+                      + Add
+                    </button>}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="fabric-form-fields">
+              <label>
+                Stages to Be Skipped:
+                <Select
+                  value={fabricEntry.stagesToSkip}
+                  onChange={(value) => handleFabricChange(index, value, 'stagesToSkip')}
+                  options={fabricStageOptions}
+                  isClearable
+                  placeholder="Select"
+                />
+              </label>
+            </div>
           </div>
-        ))}
-        <button type="button" onClick={addColorQuantity}>
-          Add More
-        </button>
-        <label>
-        Stages to Be Skipped:
-        <select value={stagesToSkip} onChange={handleStagesChange}>
-          <option value="">Select Stage to Skip</option>
-          <option value="stage1">Stage 1</option>
-          <option value="stage2">Stage 2</option>
-          <option value="stage3">Stage 3</option>
-          <option value="stage4">Stage 4</option>
-        </select>
-      </label>
-      </div>
-     
+          <div className="fabric-btn-section">
+            {(fabricEntries.length - 1 == index) && <button type="button" onClick={addFabricEntry}> + Add</button>}
+            {fabricEntries.length > 1 && <button type="button" onClick={() => removeFabricEntry(index)}>- Remove</button>}
+          </div>
+        </div>
+      ))}
 
       <label>
         Is China Fabric Present?
-        <select onChange={(e) => setChinaFabric(e.target.value === "yes")}>
+        <select className='Select' onChange={(e) => setChinaFabric(e.target.value === "yes")}>
           <option value="no">No</option>
           <option value="yes">Yes</option>
         </select>
       </label>
-      {chinaFabric && (
-        <label>
-          Select China Fabric:
-          <input
-            type="text"
-            value={chinaFabricName}
-            onChange={(e) => setChinaFabricName(e.target.value)}
-          />
-        </label>
-      )}
+      {
+        chinaFabric && (
+          <label style={{width: '250px'}}>
+            Select China Fabric:
+            <Select
+              value={chinaFabricName}
+              onChange={(value) => setChinaFabricName(value)}
+              options={fabricNameoptions}
+              isMulti
+              isClearable
+              placeholder="Select"
+            />
+          </label>
+        )
+      }
       <label>
         Choose Major Fabric:
         <select
+          className='Select'
           value={fabricName}
           onChange={(e) => setFabricName(e.target.value)}
         >
@@ -213,7 +293,7 @@ const FabricOrderForm = () => {
       </label>
       <label>
         Trims:
-        <select>
+        <select className='Select'>
           <option value="">Add More Trims</option>
           <option value="trim1">Trim 1</option>
           <option value="trim2">Trim 2</option>
@@ -221,7 +301,7 @@ const FabricOrderForm = () => {
       </label>
       <label>
         Accessories:
-        <select>
+        <select className='Select'>
           <option value="">Add More Accessories</option>
           <option value="accessory1">Accessory 1</option>
           <option value="accessory2">Accessory 2</option>
@@ -233,3 +313,5 @@ const FabricOrderForm = () => {
 };
 
 export default FabricOrderForm;
+
+
