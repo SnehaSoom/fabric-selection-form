@@ -248,7 +248,7 @@ const FabricOrderForm = () => {
             </div>
           </div>
           <div className="fabric-btn-section">
-            {(fabricEntries.length - 1 == index) && <button type="button" onClick={addFabricEntry}> + Add</button>}
+            {(fabricEntries.length - 1 === index) && <button type="button" onClick={addFabricEntry}> + Add</button>}
             {fabricEntries.length > 1 && <button type="button" onClick={() => removeFabricEntry(index)}>- Remove</button>}
           </div>
         </div>
