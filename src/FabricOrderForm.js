@@ -159,6 +159,7 @@ const FabricOrderForm = () => {
               <label>
                 Per Piece Requirement:
                 <input
+                  className="piece-input"
                   type="number"
                   step="0.1"
                   name="perPieceRequirement"
@@ -209,7 +210,7 @@ const FabricOrderForm = () => {
               <div className="stage-field">
                 <label>Color and Quantity</label>
                 {fabricEntry.colorQuantity.map((colorItem, colorIndex) => (
-                  <div key={colorIndex}>
+                  <div className="stage-field-mobile-view" key={colorIndex}>
                     <input
                       style={{ width: '100px', marginRight: '14px' }}
                       type="text"
@@ -224,11 +225,17 @@ const FabricOrderForm = () => {
                       value={colorItem.quantity}
                       onChange={(e) => handleColorChange(index, colorIndex, "quantity", e.target.value)}
                     />
-                    {fabricEntry.colorQuantity.length > 1 && <button style={{ marginRight: '14px' }} type="button" onClick={() => removeColorQuantity(index, colorIndex)}>
+                    {fabricEntry.colorQuantity.length > 1 && <button className="color-desk-btn" style={{ marginRight: '14px' }} type="button" onClick={() => removeColorQuantity(index, colorIndex)}>
                       - Remove
                     </button>}
-                    {(fabricEntry.colorQuantity.length - 1 === colorIndex) && <button type="button" onClick={() => addColorQuantity(index)}>
+                    {(fabricEntry.colorQuantity.length - 1 === colorIndex) && <button className="color-desk-btn" type="button" onClick={() => addColorQuantity(index)}>
                       + Add
+                    </button>}
+                    {fabricEntry.colorQuantity.length > 1 && <button className="color-btn" type="button" onClick={() => removeColorQuantity(index, colorIndex)}>
+                      -
+                    </button>}
+                    {(fabricEntry.colorQuantity.length - 1 === colorIndex) && <button className="color-btn" type="button" onClick={() => addColorQuantity(index)}>
+                      +
                     </button>}
                   </div>
                 ))}
@@ -251,6 +258,10 @@ const FabricOrderForm = () => {
             {(fabricEntries.length - 1 === index) && <button type="button" onClick={addFabricEntry}> + Add</button>}
             {fabricEntries.length > 1 && <button type="button" onClick={() => removeFabricEntry(index)}>- Remove</button>}
           </div>
+          <div className="fabric-btn-view-section">
+            {(fabricEntries.length - 1 === index) && <button type="button" onClick={addFabricEntry}> + </button>}
+            {fabricEntries.length > 1 && <button type="button" onClick={() => removeFabricEntry(index)}> - </button>}
+          </div>
         </div>
       ))}
 
@@ -263,7 +274,7 @@ const FabricOrderForm = () => {
       </label>
       {
         chinaFabric && (
-          <label style={{width: '250px'}}>
+          <label style={{ width: '250px' }}>
             Select China Fabric:
             <Select
               value={chinaFabricName}

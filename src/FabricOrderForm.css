@@ -22,7 +22,8 @@ h1 {
 .unit-field,
 .fabric-field {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  flex-wrap: wrap;
+  /* Allow wrapping for smaller screens */
   justify-content: space-between;
   margin-bottom: 15px;
 }
@@ -30,55 +31,63 @@ h1 {
 .date-fields label,
 .production-quantity label,
 .unit-field label {
-  flex: 1; /* Make labels take equal space */
-  margin-right: 10px; /* Space between labels */
+  flex: 1;
+  /* Make labels take equal space */
+  margin-right: 10px;
+  /* Space between labels */
 }
 
 .date-fields label:last-child,
 .production-quantity label:last-child,
 .unit-field label:last-child {
-  margin-right: 0; /* Remove margin for the last label */
+  margin-right: 0;
+  /* Remove margin for the last label */
 }
 
 /* Label styling */
 label {
-     display: flex;
-    margin: 10px 0 5px;
-    font-weight: bold;
-    flex-direction: column;
-    align-items: stretch;
-    /* width: 250px !important; */
+  display: flex;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  flex-direction: column;
+  align-items: stretch;
+  /* width: 250px !important; */
 }
 
 /* Input and select styling */
 input[type="text"],
 input[type="number"],
 select,
-input[type="date"] { /* Add input[type="date"] to style date inputs */
+input[type="date"] {
+  /* Add input[type="date"] to style date inputs */
   padding: 8px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   transition: border-color 0.3s;
   height: 20px;
-  width: 250px; /* Decrease width to 80% (adjust as needed) */
+  width: 250px;
+  /* Decrease width to 80% (adjust as needed) */
 }
 
-.Select{
+.Select {
   padding: 8px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   transition: border-color 0.3s;
   height: 36px;
-  width: 250px; /* Decrease width to 80% (adjust as needed) */
+  width: 250px;
+  /* Decrease width to 80% (adjust as needed) */
 }
 
 input[type="text"]:focus,
 input[type="number"]:focus,
 select:focus,
-input[type="date"]:focus { /* Add focus styles for date inputs */
-  border-color: #007bff; /* Blue border on focus */
+input[type="date"]:focus {
+  /* Add focus styles for date inputs */
+  border-color: #007bff;
+  /* Blue border on focus */
   outline: none;
 }
 
@@ -99,7 +108,8 @@ input[type="date"]:focus { /* Add focus styles for date inputs */
 .add-color-button,
 button[type="submit"],
 button.add-more {
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50;
+  /* Green */
   color: white;
   padding: 10px 15px;
   border: none;
@@ -112,55 +122,69 @@ button.add-more {
 .add-color-button:hover,
 button[type="submit"]:hover,
 button.add-more:hover {
-  background-color: #45a049; /* Darker green */
-  transform: scale(1.05); /* Slightly enlarge button on hover */
+  background-color: #45a049;
+  /* Darker green */
+  transform: scale(1.05);
+  /* Slightly enlarge button on hover */
 }
 
 /* Submit button styling */
 button[type="submit"] {
-  background-color: #008cba; /* Blue */
+  background-color: #008cba;
+  /* Blue */
   width: 100%;
-  margin-top: 20px; /* Space above the submit button */
+  margin-top: 20px;
+  /* Space above the submit button */
 }
 
 button[type="submit"]:hover {
-  background-color: #007b9e; /* Darker blue */
+  background-color: #007b9e;
+  /* Darker blue */
 }
 
 /* Add More button specific styling */
 button[type="button"].add-more {
-  background-color: #008cba; /* Blue */
-  width: auto; /* Adjust width as needed */
-  margin-top: 10px; /* Space above the button */
+  background-color: #008cba;
+  /* Blue */
+  width: auto;
+  /* Adjust width as needed */
+  margin-top: 10px;
+  /* Space above the button */
 }
 
 button.add-more:hover {
-  background-color: #0069d9; /* Darker blue on hover */
+  background-color: #0069d9;
+  /* Darker blue on hover */
 }
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
+
   .date-fields,
   .production-quantity,
   .unit-field {
-    flex-direction: column; /* Stack labels vertically */
+    flex-direction: column;
+    /* Stack labels vertically */
   }
+
   .date-fields label,
   .production-quantity label,
   .unit-field label {
-    margin-right: 0; /* Reset margin for vertical stacking */
-    margin-bottom: 10px; /* Space between stacked labels */
+    margin-right: 0;
+    /* Reset margin for vertical stacking */
+    margin-bottom: 10px;
+    /* Space between stacked labels */
   }
 }
 
 
-.fabric-section{
+.fabric-section {
   /* border: 1px solid black; */
   /* height: 400px; */
   display: flex;
 }
 
-.fabric-form-section{
+.fabric-form-section {
   border: 1px dotted gray;
   border-radius: 10px;
   padding: 5px;
@@ -168,7 +192,7 @@ button.add-more:hover {
   margin-bottom: 10px;
 }
 
-.fabric-form-fields{
+.fabric-form-fields {
   /* border: 1px solid blue; */
   width: calc(100% - 60px);
   display: flex;
@@ -176,26 +200,26 @@ button.add-more:hover {
   padding-right: 20px;
 }
 
-.fabric-form-col-fields{
+.fabric-form-col-fields {
   /* border: 1px solid blue; */
   display: flex;
   /* flex-direction: column; */
 }
 
-.fabric-form-row-fields{
+.fabric-form-row-fields {
   display: flex;
 }
 
-.fabric-form-row-fields label{
+.fabric-form-row-fields label {
   display: block !important;
   margin-left: 20px;
 }
 
-.fabric-form-fields label{
+.fabric-form-fields label {
   width: 250px !important;
 }
 
-.fabric-btn-section{
+.fabric-btn-section {
   width: 10%;
   display: flex;
   flex-direction: column;
@@ -207,4 +231,65 @@ button.add-more:hover {
 
 .fabric-btn-section button {
   width: 80px;
+}
+
+.fabric-btn-view-section {
+  display: none;
+}
+
+.color-btn{
+  display: none;
+}
+
+
+
+@media (max-width: 600px) {
+  .fabric-form-fields {
+    width: 100%;
+    flex-direction: column !important;
+  }
+
+  .color-desk-btn{
+    display: none;
+  }
+
+  .color-btn{
+    display: block;
+    height: 25px;
+    width: 30px !important;
+    margin-right: 5px !important;
+  }
+
+  .fabric-btn-section {
+    display: none;
+  }
+
+  .fabric-btn-view-section {
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(10px);
+    display: visible;
+  }
+
+  .fabric-btn-view-section button {
+     width: 40px;
+  }
+
+  .stage-field-mobile-view{
+    display: flex;
+    align-items: center;
+  }
+
+  .stage-field-mobile-view input{
+    width: 80px !important;
+  }
+
+  .piece-input{
+    width: 93% !important;
+  }
+
 }
